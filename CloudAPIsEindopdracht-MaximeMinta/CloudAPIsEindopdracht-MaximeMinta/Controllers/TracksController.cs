@@ -7,9 +7,12 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace CloudAPIsEindopdracht_MaximeMinta.Controllers
 {
+    [ApiController]
+    [Route("api/tracks")]
     public class TracksController : Controller
     {
         // GET: Tracks
+        [HttpGet]
         public ActionResult Index()
         {
             return View();
