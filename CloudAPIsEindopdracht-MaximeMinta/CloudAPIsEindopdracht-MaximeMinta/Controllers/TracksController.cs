@@ -11,21 +11,40 @@ namespace CloudAPIsEindopdracht_MaximeMinta.Controllers
     [Route("api/tracks")]
     public class TracksController : Controller
     {
-        // GET: Tracks
+        // GET: Toon alle tracks in de bibliotheek
         [HttpGet]
-        public ActionResult Index()
+        public Track GetAllTracks()
         {
-            return View();
+            var track1 = new Track()
+            {
+                Title = "I might delete this one soon",
+                Album = "",
+                Year = 2018,
+                BPM = 140,
+                Artist = "Polyte",
+                Key = "Em"
+
+            };
+            //return Content("Hello World!");
+            return track1;
         }
 
-        // GET: Tracks/Details/5
-        public ActionResult Details(int id)
+        // GET: Tracks/5
+        [Route("{id}")]
+        [HttpGet]
+        public ActionResult<Track> GetTrackById(int id)
         {
-            return View();
+            //hier moet dan de logica komen om de track op te zoeken in een lijst/ databank
+            if (false) //track not found
+            {
+                return NotFound();
+            }
+            return Content(id + " hey wereld!");
+
         }
 
         // GET: Tracks/Create
-        public ActionResult Create()
+        public IActionResult Create()
         {
             return View();
         }
@@ -33,7 +52,7 @@ namespace CloudAPIsEindopdracht_MaximeMinta.Controllers
         // POST: Tracks/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public IActionResult Create(IFormCollection collection)
         {
             try
             {
@@ -48,7 +67,7 @@ namespace CloudAPIsEindopdracht_MaximeMinta.Controllers
         }
 
         // GET: Tracks/Edit/5
-        public ActionResult Edit(int id)
+        public IActionResult Edit(int id)
         {
             return View();
         }
@@ -56,7 +75,7 @@ namespace CloudAPIsEindopdracht_MaximeMinta.Controllers
         // POST: Tracks/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public IActionResult Edit(int id, IFormCollection collection)
         {
             try
             {
@@ -70,16 +89,19 @@ namespace CloudAPIsEindopdracht_MaximeMinta.Controllers
             }
         }
 
-        // GET: Tracks/Delete/5
-        public ActionResult Delete(int id)
+        // GET: Tracks/Delete/5 -> Delete entry uit db
+        [Route("{id}")]
+        [HttpDelete]
+        public IActionResult Delete(int id)
         {
+            //TODO: VERWIJDEREN LOGICA NOG HIER
             return View();
         }
 
         // POST: Tracks/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        public IActionResult Delete(int id, IFormCollection collection)
         {
             try
             {
