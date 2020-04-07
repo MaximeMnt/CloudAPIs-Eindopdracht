@@ -18,7 +18,6 @@ namespace CloudAPIsEindopdracht_MaximeMinta
                 var track = new Track()
                 {
                     Title = "Promise",
-                    Artist = "Polyte",
                     BPM = 110,
                     Year = 2020
                     

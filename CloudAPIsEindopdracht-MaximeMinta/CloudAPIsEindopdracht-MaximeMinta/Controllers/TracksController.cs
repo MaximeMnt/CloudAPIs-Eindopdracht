@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace CloudAPIsEindopdracht_MaximeMinta.Controllers
 {
     [ApiController]
-    [Route("api/tracks")]
+    [Route("api/tracks2")]
     public class TracksController : Controller
     {
         // GET: Toon alle tracks in de bibliotheek
@@ -21,7 +21,6 @@ namespace CloudAPIsEindopdracht_MaximeMinta.Controllers
                 Album = "",
                 Year = 2018,
                 BPM = 140,
-                Artist = "Polyte",
                 Key = "Em"
 
             };
