@@ -9,9 +9,9 @@ namespace CloudAPIsEindopdracht_MaximeMinta.Controllers
     [Route("api/tracks")]
     public class Tracks2Controller : Controller
     {
-        private readonly SongLibrary library;
+        private readonly SongLibraryDbContext library;
 
-        public Tracks2Controller(SongLibrary library)
+        public Tracks2Controller(SongLibraryDbContext library)
         {
             this.library = library;
         }
@@ -61,10 +61,10 @@ namespace CloudAPIsEindopdracht_MaximeMinta.Controllers
             }
         }
 
-        [HttpPut]
+        [HttpPut] //change data from db
         public IActionResult UpdateTrack([FromBody] Track UpdateTrack)
         {
-            var originalTrack = library.Tracks.Find(UpdateTrack.ID);
+            var originalTrack = library.Tracks.Find(UpdateTrack.TrackID);
             if (originalTrack == null)
             {
                 return NotFound();
@@ -75,7 +75,7 @@ namespace CloudAPIsEindopdracht_MaximeMinta.Controllers
                 originalTrack.Album = UpdateTrack.Album;
                 originalTrack.ArtistID = UpdateTrack.ArtistID;
                 originalTrack.BPM = UpdateTrack.BPM;
-                originalTrack.FeaturingArtists = UpdateTrack.FeaturingArtists;
+                originalTrack.FeaturingArtistsIDs = UpdateTrack.FeaturingArtistsIDs;
                 originalTrack.Genre = UpdateTrack.Genre;
                 originalTrack.Key = UpdateTrack.Key;
                 originalTrack.Year = UpdateTrack.Year;

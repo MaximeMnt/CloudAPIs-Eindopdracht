@@ -28,7 +28,7 @@ namespace CloudAPIsEindopdracht_MaximeMinta
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<SongLibrary>(
+            services.AddDbContext<SongLibraryDbContext>(
                     options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")
                     )
                 );
@@ -39,7 +39,7 @@ namespace CloudAPIsEindopdracht_MaximeMinta
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, SongLibrary libContext)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, SongLibraryDbContext libContext)
         {
             if (env.IsDevelopment())
             {

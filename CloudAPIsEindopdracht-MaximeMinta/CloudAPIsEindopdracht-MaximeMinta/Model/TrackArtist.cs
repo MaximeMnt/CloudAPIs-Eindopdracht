@@ -5,10 +5,13 @@ using System.Threading.Tasks;
 
 namespace CloudAPIsEindopdracht_MaximeMinta
 {
-    public class Artist
+    public class TrackArtist
     {
+        public int TrackID { get; set; }
+        public Track Track { get; set; }
+
         public int ArtistID { get; set; }
-        public string Name { get; set; }
-        public ICollection<Track> Tracks { get; set; }
+        public Artist Artist { get; set; }
+
     }
 }
