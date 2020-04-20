@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 
-namespace CloudAPIsEindopdracht_MaximeMinta.Controllers
+namespace RESTful_API_MaximeMinta_v2
 {
     [Route("api/artists")]
     public class ArtistController : Controller
