@@ -13,30 +13,52 @@ namespace RESTful_API_MaximeMinta_v2
             context.Database.EnsureCreated();
 
             //are there already tracks present
-            //if (!context.Tracks.Any())
-            //{
-            //    var track = new Track()
-            //    {
-            //        Title = "Promise",
-            //        BPM = 110,
-            //        Year = 2020
+            if (!context.Tracks.Any())
+            {
+                //var track = new Track()
+                //{
+                //    Title = "Promise",
+                //    BPM = 110,
+                //    Year = 2020
 
-            //    };
+                //};
 
-            //    var Artist1 = new Artist()
-            //    {
-            //        Name = "Polyte",
-            //        //Tracks = track nog toevoegen, //dia 21
-            //        ArtistID = 0
+                //var Artist1 = new Artist()
+                //{
+                //    Name = "Polyte",
+                //    //Tracks = track nog toevoegen, //dia 21
+                //    ArtistID = 0
 
-            //    };
-            //    Artist1.Tracks.Add(track); //track toeveogen op deze manier
+                //};
+                //Artist1.Tracks.Add(track); //track toeveogen op deze manier
 
-            //    //add the book to the collection of books
-            //    context.Artists.Add(Artist1);
-            //    context.Tracks.Add(track);
-            //    context.SaveChanges();
-            //}
+                ////add the book to the collection of books
+                //context.Artists.Add(Artist1);
+                //context.Tracks.Add(track);
+
+
+                var track = new Track()
+                {
+                    Title = "Hello",
+                    BPM = 100,
+                    Year = 2020,
+                    ArtistName = "Kaas",
+                    Album = "Welkom API!"
+                };
+
+                var track2 = new Track()
+                {
+                    Title = "I might Delete this one soon",
+                    ArtistName = "Polyte",
+                    BPM = 140,
+                    Year = 2018,
+                    Genre = "Trap"
+                };
+
+                context.Tracks.Add(track);
+                context.Tracks.Add(track2);
+                context.SaveChanges();
+            }
         }
     }
 }

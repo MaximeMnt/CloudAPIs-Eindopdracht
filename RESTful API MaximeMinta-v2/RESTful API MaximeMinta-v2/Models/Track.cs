@@ -9,10 +9,10 @@ namespace RESTful_API_MaximeMinta_v2
     {
         public int TrackID { get; set; } //primaire sleutel
         public string Title { get; set; }
-        public int ArtistID { get; set; } //vreemde sleutel
+        public string ArtistName { get; set; } //zou vreemde sleutel moeten zijn
         public string Album { get; set; }
         public string Genre { get; set; }
-        public string FeaturingArtistsIDs { get; set; } //vreemde sleutel
+        public string FeaturingArtists { get; set; } 
         public int Year { get; set; }
         public int BPM { get; set; }        
         public string Key { get; set; }

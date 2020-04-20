@@ -20,6 +20,10 @@ namespace RESTful_API_MaximeMinta_v2
         {
             modelBuilder.Entity<TrackArtist>()
                 .HasKey(t => new { t.ArtistID, t.TrackID });
+
+            modelBuilder.Entity<Track>().HasKey(t => new { t.TrackID });
+            modelBuilder.Entity<Artist>().HasKey(t => new { t.ArtistID });
+
         }
 
 
