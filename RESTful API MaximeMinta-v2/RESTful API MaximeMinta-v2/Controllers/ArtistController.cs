@@ -63,7 +63,7 @@ namespace RESTful_API_MaximeMinta_v2
         }
 
         [HttpPut]
-        public IActionResult UpdateTrack([FromBody] Artist UpdateArtist)
+        public IActionResult UpdateArtist([FromBody] Artist UpdateArtist)
         {
             var OriginalArtist = library.Artists.Find(UpdateArtist.ArtistID);
             if (OriginalArtist == null)
@@ -74,7 +74,7 @@ namespace RESTful_API_MaximeMinta_v2
             {
                 OriginalArtist.Name = UpdateArtist.Name;
                 OriginalArtist.Tracks = UpdateArtist.Tracks;
-
+                OriginalArtist.TrackArtists = UpdateArtist.TrackArtists;
                 library.SaveChanges();
                 return Ok(OriginalArtist);
             }

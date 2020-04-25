@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace RESTful_API_MaximeMinta_v2
@@ -16,7 +17,7 @@ namespace RESTful_API_MaximeMinta_v2
         public int Year { get; set; }
         public int BPM { get; set; }        
         public string Key { get; set; }
-
+        [JsonIgnore]
         public IList<TrackArtist> TrackArtists { get; set; } = new List<TrackArtist>();
     }
 }

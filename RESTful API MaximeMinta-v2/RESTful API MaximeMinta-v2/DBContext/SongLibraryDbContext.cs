@@ -21,9 +21,19 @@ namespace RESTful_API_MaximeMinta_v2
             modelBuilder.Entity<TrackArtist>()
                 .HasKey(t => new { t.ArtistID, t.TrackID });
 
+            modelBuilder.Entity<TrackArtist>()
+                .HasOne(t => t.Artist)
+                .WithMany(a => a.TrackArtists)
+                .HasForeignKey(t => t.ArtistID);
+
+            modelBuilder.Entity<TrackArtist>()
+                .HasOne(t => t.Track)
+                .WithMany(a => a.TrackArtists)
+                .HasForeignKey(t => t.TrackID);
+
+
             modelBuilder.Entity<Track>().HasKey(t => new { t.TrackID });
             modelBuilder.Entity<Artist>().HasKey(t => new { t.ArtistID });
-
         }
 
 

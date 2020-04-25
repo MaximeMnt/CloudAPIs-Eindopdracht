@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace RESTful_API_MaximeMinta_v2
 {
@@ -17,9 +18,31 @@ namespace RESTful_API_MaximeMinta_v2
         }
 
         [HttpGet] //api/tracks
-        public List<Track> GetAllTracks()
+        public List<Track> GetAllTracks(int? BPM, string Key, string Album, string Title, string Artist)
         {
-            return library.Tracks.ToList();
+            IQueryable<Track> query = library.Tracks;
+
+            if (!string.IsNullOrWhiteSpace(Key))
+            {
+                query = query.Where(d => d.Key == Key);
+            }
+            if (BPM != null)
+            {
+                query = query.Where(d => d.BPM == BPM);
+            }
+            if (!string.IsNullOrWhiteSpace(Album))
+                query = query.Where(d => d.Album == Album);
+            if (!string.IsNullOrWhiteSpace(Title))
+                query = query.Where(d => d.Title == Title);
+            if (!string.IsNullOrWhiteSpace(Artist))
+                query = query.Where(d => d.ArtistName == Artist);
+
+
+
+
+            return query.ToList();
+
+            //return library.Tracks.ToList();
         }
 
         [HttpPost]
@@ -34,12 +57,16 @@ namespace RESTful_API_MaximeMinta_v2
 
         [Route("{id}")]
         [HttpGet]
-        public IActionResult GetTrack(int id)
+        public IActionResult GetTrackById(int id)
         {
-            var track = library.Tracks.Find(id);
+            var track = library.Tracks
+                .Include(d => d.TrackArtists)
+                .SingleOrDefault(d => d.TrackID == id);
+            
+            //var track = library.Tracks.Find(id);
             if (track == null)
             {
-                return NotFound();
+              return NotFound();
             } return Ok(track);
         }
 
@@ -79,6 +106,7 @@ namespace RESTful_API_MaximeMinta_v2
                 originalTrack.Genre = UpdateTrack.Genre;
                 originalTrack.Key = UpdateTrack.Key;
                 originalTrack.Year = UpdateTrack.Year;
+                originalTrack.TrackArtists = UpdateTrack.TrackArtists;
 
                 library.SaveChanges();
                 return Ok(originalTrack);

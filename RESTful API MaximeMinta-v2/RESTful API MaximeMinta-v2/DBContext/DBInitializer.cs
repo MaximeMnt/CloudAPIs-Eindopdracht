@@ -15,28 +15,6 @@ namespace RESTful_API_MaximeMinta_v2
             //are there already tracks present
             if (!context.Tracks.Any())
             {
-                //var track = new Track()
-                //{
-                //    Title = "Promise",
-                //    BPM = 110,
-                //    Year = 2020
-
-                //};
-
-                //var Artist1 = new Artist()
-                //{
-                //    Name = "Polyte",
-                //    //Tracks = track nog toevoegen, //dia 21
-                //    ArtistID = 0
-
-                //};
-                //Artist1.Tracks.Add(track); //track toeveogen op deze manier
-
-                ////add the book to the collection of books
-                //context.Artists.Add(Artist1);
-                //context.Tracks.Add(track);
-
-
                 var track = new Track()
                 {
                     Title = "Hello",
@@ -55,8 +33,26 @@ namespace RESTful_API_MaximeMinta_v2
                     Genre = "Trap"
                 };
 
+                var Artist = new Artist()
+                {
+                    Name = "Hey hey hey"
+                };
+                var Artist1 = new Artist()
+                {
+                    Name = "Hallow"
+                };
+
+                var TrackArtist = new TrackArtist();
+                TrackArtist.Artist = Artist;
+                TrackArtist.Track = track;
+
+
+                Artist1.Tracks.Add(track2);
+                track2.TrackArtists.Add(TrackArtist);
                 context.Tracks.Add(track);
                 context.Tracks.Add(track2);
+                context.Artists.Add(Artist1);
+                context.Artists.Add(Artist);
                 context.SaveChanges();
             }
         }
