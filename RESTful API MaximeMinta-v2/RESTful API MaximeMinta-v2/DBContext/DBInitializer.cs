@@ -15,40 +15,46 @@ namespace RESTful_API_MaximeMinta_v2
             //are there already tracks present
             if (!context.Tracks.Any())
             {
+                var Artist = new Artist()
+                {
+                    Name = "Kanye West"
+                };
+                var Artist1 = new Artist()
+                {
+                    Name = "K, Le Maestro"
+                };
+
                 var track = new Track()
                 {
-                    Title = "Hello",
-                    BPM = 100,
-                    Year = 2020,
-                    ArtistName = "Kaas",
-                    Album = "Welkom API!"
+                    Title = "God Is",
+                    BPM = 105,
+                    Year = 2019,
+                    //ArtistName = "Kanye West",
+                    Album = "JESUS IS KING",
+                    Key = "Db",
+                    Genre = "Hip/Hop",
+                    Artists = { Artist }
+
                 };
 
                 var track2 = new Track()
                 {
-                    Title = "I might Delete this one soon",
-                    ArtistName = "Polyte",
-                    BPM = 140,
+                    Title = "START, FORMAT IT!",
+                    //ArtistName = "K, Le Maestro",
+                    BPM = 109,
                     Year = 2018,
-                    Genre = "Trap"
+                    Album = "Single",
+                    Genre = "Trap",
+                    Key= "Bbm",
+                    Artists = { Artist1 }
                 };
 
-                var Artist = new Artist()
-                {
-                    Name = "Hey hey hey"
-                };
-                var Artist1 = new Artist()
-                {
-                    Name = "Hallow"
-                };
+                
 
-                var TrackArtist = new TrackArtist();
-                TrackArtist.Artist = Artist;
-                TrackArtist.Track = track;
-
-
-                Artist1.Tracks.Add(track2);
-                track2.TrackArtists.Add(TrackArtist);
+                //var TrackArtist = new TrackArtist() { Track = track2, Artist = Artist };
+                //context.TrackArtists.Add(TrackArtist);
+                track.Artists.Add(Artist);
+                track2.Artists.Add(Artist1);
                 context.Tracks.Add(track);
                 context.Tracks.Add(track2);
                 context.Artists.Add(Artist1);

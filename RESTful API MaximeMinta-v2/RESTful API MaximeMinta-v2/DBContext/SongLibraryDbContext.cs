@@ -10,7 +10,7 @@ namespace RESTful_API_MaximeMinta_v2
     {
         public DbSet<Track> Tracks { get; set; }
         public DbSet<Artist> Artists { get; set; }
-        public DbSet<TrackArtist> TrackArtists { get; set; }
+        //public DbSet<TrackArtist> TrackArtists { get; set; }
 
         public SongLibraryDbContext(DbContextOptions<SongLibraryDbContext> options): base(options) 
         {
@@ -18,22 +18,28 @@ namespace RESTful_API_MaximeMinta_v2
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<TrackArtist>()
-                .HasKey(t => new { t.ArtistID, t.TrackID });
+            //TODO: Voeg een vreemde sleutel toe Tracks.Artists && Artists.Tracks
+           //modelBuilder.Entity<Artist>().HasOne(t => t.Name).WithMany(a => a.Tracks).HasForeignKey<Track>(b => b.t)
 
-            modelBuilder.Entity<TrackArtist>()
-                .HasOne(t => t.Artist)
-                .WithMany(a => a.TrackArtists)
-                .HasForeignKey(t => t.ArtistID);
+            base.OnModelCreating(modelBuilder);
 
-            modelBuilder.Entity<TrackArtist>()
-                .HasOne(t => t.Track)
-                .WithMany(a => a.TrackArtists)
-                .HasForeignKey(t => t.TrackID);
+            
+            //modelBuilder.Entity<TrackArtist>()
+            //    .HasKey(t => new { t.ArtistID, t.TrackID });
+
+            //modelBuilder.Entity<TrackArtist>()
+            //    .HasOne(t => t.Artist)
+            //    .WithMany(a => a.TrackArtists)
+            //    .HasForeignKey(t => t.ArtistID);
+
+            //modelBuilder.Entity<TrackArtist>()
+            //    .HasOne(t => t.Track)
+            //    .WithMany(a => a.TrackArtists)
+            //    .HasForeignKey(t => t.TrackID);
 
 
-            modelBuilder.Entity<Track>().HasKey(t => new { t.TrackID });
-            modelBuilder.Entity<Artist>().HasKey(t => new { t.ArtistID });
+            //modelBuilder.Entity<Track>().HasKey(t => new { t.TrackID });
+            //modelBuilder.Entity<Artist>().HasKey(t => new { t.ArtistID });
         }
 
 

@@ -34,8 +34,8 @@ namespace RESTful_API_MaximeMinta_v2
                 query = query.Where(d => d.Album == Album);
             if (!string.IsNullOrWhiteSpace(Title))
                 query = query.Where(d => d.Title == Title);
-            if (!string.IsNullOrWhiteSpace(Artist))
-                query = query.Where(d => d.ArtistName == Artist);
+            //if (!string.IsNullOrWhiteSpace(Artist))
+            //    query = query.Where(d => d.ArtistName == Artist);
 
 
 
@@ -60,7 +60,7 @@ namespace RESTful_API_MaximeMinta_v2
         public IActionResult GetTrackById(int id)
         {
             var track = library.Tracks
-                .Include(d => d.TrackArtists)
+                //.Include(d => d.TrackArtists)
                 .SingleOrDefault(d => d.TrackID == id);
             
             //var track = library.Tracks.Find(id);
@@ -100,13 +100,13 @@ namespace RESTful_API_MaximeMinta_v2
             {
                 originalTrack.Title = UpdateTrack.Title;
                 originalTrack.Album = UpdateTrack.Album;
-                originalTrack.ArtistName = UpdateTrack.ArtistName;
+                //originalTrack.ArtistName = UpdateTrack.ArtistName;
                 originalTrack.BPM = UpdateTrack.BPM;
-                originalTrack.FeaturingArtists = UpdateTrack.FeaturingArtists;
+                //originalTrack.FeaturingArtists = UpdateTrack.FeaturingArtists;
                 originalTrack.Genre = UpdateTrack.Genre;
                 originalTrack.Key = UpdateTrack.Key;
                 originalTrack.Year = UpdateTrack.Year;
-                originalTrack.TrackArtists = UpdateTrack.TrackArtists;
+                //originalTrack.TrackArtists = UpdateTrack.TrackArtists;
 
                 library.SaveChanges();
                 return Ok(originalTrack);

@@ -73,8 +73,8 @@ namespace RESTful_API_MaximeMinta_v2
             else
             {
                 OriginalArtist.Name = UpdateArtist.Name;
-                OriginalArtist.Tracks = UpdateArtist.Tracks;
-                OriginalArtist.TrackArtists = UpdateArtist.TrackArtists;
+                //OriginalArtist.Tracks = UpdateArtist.Tracks;
+                //OriginalArtist.TrackArtists = UpdateArtist.TrackArtists;
                 library.SaveChanges();
                 return Ok(OriginalArtist);
             }
