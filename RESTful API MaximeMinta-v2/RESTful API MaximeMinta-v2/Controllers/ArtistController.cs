@@ -17,9 +17,53 @@ namespace RESTful_API_MaximeMinta_v2
         }
 
         [HttpGet] //api/artists
-        public List<Artist> GetAllArtists()
+        public List<Artist> GetAllArtists(string name, int? ID, int? page, string sort, int length = 10, string dir = "asc")
         {
-            return library.Artists.ToList();
+            IQueryable<Artist> query = library.Artists;
+
+            if (!string.IsNullOrWhiteSpace(name))
+                query = query.Where(d => d.Name == name);
+            if (ID != null)
+                query = query.Where(d => d.ArtistID == ID);
+            if (page.HasValue)
+                query = query.Skip(page.Value * length);
+            query = query.Take(length);
+
+
+            if (!string.IsNullOrWhiteSpace(sort))
+            {
+                switch (sort)
+                {
+                    case "artistID":
+                        if (dir == "asc")
+                        {
+                            query = query.OrderBy(d => d.ArtistID);
+                        }
+                        else if (dir == "desc")
+                        {
+                            query = query.OrderByDescending(d => d.ArtistID);
+                        }
+                        break;
+
+
+                    case "name":
+                        if (dir == "asc")
+                        {
+                            query = query.OrderBy(d => d.Name);
+                        }
+                        else if (dir == "desc")
+                        {
+                            query = query.OrderByDescending(d => d.Name);
+                        }
+                        break;
+                }
+            }
+
+
+
+            return query.ToList();
+
+            //return library.Artists.ToList();
         }
 
         [HttpPost]

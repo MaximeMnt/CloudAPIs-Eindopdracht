@@ -16,8 +16,10 @@ namespace RESTful_API_MaximeMinta_v2
         public int TrackID { get; set; } //primaire sleutel
 
         [Required]
+        [StringLength(100)]
         public string Title { get; set; }
         //public string ArtistName { get; set; } //zou vreemde sleutel moeten zijn
+        [StringLength(300)]
         public string Album { get; set; }
         public string Genre { get; set; }
         //public string FeaturingArtists { get; set; }
@@ -25,7 +27,7 @@ namespace RESTful_API_MaximeMinta_v2
         [Range(1500,int.MaxValue)]
         public int Year { get; set; }
 
-        [Required]
+         //Required heeft hier geen nut in ppt staat dat het geen effect heeft op non nullable types
         [Range(1,399)]
         public int BPM { get; set; }
 

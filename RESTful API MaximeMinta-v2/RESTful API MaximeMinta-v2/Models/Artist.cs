@@ -13,6 +13,8 @@ namespace RESTful_API_MaximeMinta_v2
     {
         [Key]
         public int ArtistID { get; set; } //primaire sleutel
+        [Required]
+        [StringLength(50)]
         public string Name { get; set; }
 
         [JsonIgnore]

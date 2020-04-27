@@ -61,6 +61,11 @@ namespace RESTful_API_MaximeMinta_v2
 
             DBInitializer.Initialize(libContext);
 
+            app.UseCors(builder =>
+                builder.AllowAnyOrigin()
+                .AllowAnyMethod()
+                .AllowAnyHeader());
+
         }
     }
 }
