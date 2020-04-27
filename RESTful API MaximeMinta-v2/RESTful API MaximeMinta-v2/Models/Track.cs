@@ -14,14 +14,24 @@ namespace RESTful_API_MaximeMinta_v2
     {
         [Key]
         public int TrackID { get; set; } //primaire sleutel
+
+        [Required]
         public string Title { get; set; }
         //public string ArtistName { get; set; } //zou vreemde sleutel moeten zijn
         public string Album { get; set; }
         public string Genre { get; set; }
         //public string FeaturingArtists { get; set; }
+
+        [Range(1500,int.MaxValue)]
         public int Year { get; set; }
+
+        [Required]
+        [Range(1,399)]
         public int BPM { get; set; }
+
+        [Required]
         public string Key { get; set; }
+
         [JsonIgnore]
         [ForeignKey("ArtistsRef")]
         //[NotMapped]

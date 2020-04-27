@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.Metadata.Ecma335;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -18,7 +19,7 @@ namespace RESTful_API_MaximeMinta_v2
         }
 
         [HttpGet] //api/tracks
-        public List<Track> GetAllTracks(int? BPM, string Key, string Album, string Title, string Artist)
+        public List<Track> GetAllTracks(int? BPM, string Key, string Album, string Title, string Artist, int? page, string sort, int length = 10, string dir = "asc")
         {
             IQueryable<Track> query = library.Tracks;
 
@@ -34,9 +35,40 @@ namespace RESTful_API_MaximeMinta_v2
                 query = query.Where(d => d.Album == Album);
             if (!string.IsNullOrWhiteSpace(Title))
                 query = query.Where(d => d.Title == Title);
+            if (page.HasValue)
+                query = query.Skip(page.Value * length);
+            query = query.Take(length);
             //if (!string.IsNullOrWhiteSpace(Artist))
             //    query = query.Where(d => d.ArtistName == Artist);
 
+            if (!string.IsNullOrWhiteSpace(sort))
+            {
+                switch (sort)
+                {
+                    case "BPM":
+                        if (dir == "asc")
+                        {
+                            query = query.OrderBy(d => d.BPM);
+                        }
+                        else if (dir == "desc")
+                        {
+                            query = query.OrderByDescending(d => d.BPM);
+                        }
+                        break;
+
+
+                    case "Title":
+                        if (dir == "asc")
+                        {
+                            query = query.OrderBy(d => d.Title);
+                        }
+                        else if (dir == "desc")
+                        {
+                            query = query.OrderByDescending(d => d.Title);
+                        }
+                        break;
+                }
+            }
 
 
 
