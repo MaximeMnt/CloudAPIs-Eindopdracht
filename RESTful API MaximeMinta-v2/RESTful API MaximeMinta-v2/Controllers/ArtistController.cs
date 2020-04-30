@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace RESTful_API_MaximeMinta_v2
 {
@@ -58,12 +59,12 @@ namespace RESTful_API_MaximeMinta_v2
                         break;
                 }
             }
-
-
-
-            return query.ToList();
-
-            //return library.Artists.ToList();
+            return query
+                .Include(d => d.Tracks)
+                .ThenInclude(d => d.Track) //level omlaag -> Toon de track
+                .AsNoTracking() //toont geen artists opnieuw
+                .Include(a => a.Socials)
+                .ToList();
         }
 
         [HttpPost]

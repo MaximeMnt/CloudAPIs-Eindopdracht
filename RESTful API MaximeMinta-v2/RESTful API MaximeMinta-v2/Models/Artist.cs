@@ -1,14 +1,17 @@
-﻿using System;
+﻿using RESTful_API_MaximeMinta_v2.Models;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace RESTful_API_MaximeMinta_v2
 {
+    //[DataContract]
     public class Artist
     {
         [Key]
@@ -18,12 +21,12 @@ namespace RESTful_API_MaximeMinta_v2
         public string Name { get; set; }
 
         [JsonIgnore]
-        //[ForeignKey("TracksRef")]
-        [NotMapped]
-        public ICollection<Track> Tracks { get; set; } = new Collection<Track>();
+        [Url]
+        public ICollection<URL> Socials { get; set; }
 
-        //[JsonIgnore]
-        //public ICollection<TrackArtist> TrackArtists { get; set; }
+        //[DataMember]
+        [JsonIgnore]
+        public ICollection<TrackArtist> Tracks { get; set; }
 
     }
     

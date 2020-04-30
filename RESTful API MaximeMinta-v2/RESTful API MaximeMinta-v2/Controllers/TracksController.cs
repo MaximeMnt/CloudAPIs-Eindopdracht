@@ -38,6 +38,8 @@ namespace RESTful_API_MaximeMinta_v2
             if (page.HasValue)
                 query = query.Skip(page.Value * length);
             query = query.Take(length);
+
+            //Nog zoeken op artist:
             //if (!string.IsNullOrWhiteSpace(Artist))
             //    query = query.Where(d => d.ArtistName == Artist);
 
@@ -69,12 +71,11 @@ namespace RESTful_API_MaximeMinta_v2
                         break;
                 }
             }
-
-
-
-            return query.ToList();
-
-            //return library.Tracks.ToList();
+            return query
+                .Include(d => d.Artists)
+                .ThenInclude(d => d.Artist) //toon nu de volledige artist klasse
+                .AsNoTracking()
+                .ToList();
         }
 
         [HttpPost]
@@ -92,7 +93,7 @@ namespace RESTful_API_MaximeMinta_v2
         public IActionResult GetTrackById(int id)
         {
             var track = library.Tracks
-                //.Include(d => d.TrackArtists)
+                .Include(d => d.Artists)
                 .SingleOrDefault(d => d.TrackID == id);
             
             //var track = library.Tracks.Find(id);
@@ -112,7 +113,7 @@ namespace RESTful_API_MaximeMinta_v2
                 return NotFound();
             } else
             {
-                //verwijder boek
+                //verwijder item
                 library.Tracks.Remove(track);
                 library.SaveChanges();
 
@@ -138,7 +139,7 @@ namespace RESTful_API_MaximeMinta_v2
                 originalTrack.Genre = UpdateTrack.Genre;
                 originalTrack.Key = UpdateTrack.Key;
                 originalTrack.Year = UpdateTrack.Year;
-                //originalTrack.TrackArtists = UpdateTrack.TrackArtists;
+                originalTrack.Artists = UpdateTrack.Artists;
 
                 library.SaveChanges();
                 return Ok(originalTrack);
