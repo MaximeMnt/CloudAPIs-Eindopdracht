@@ -50,6 +50,11 @@ namespace RESTful_API_MaximeMinta_v2
 
             app.UseHttpsRedirection();
 
+            app.UseCors(builder =>
+                builder.AllowAnyOrigin()
+                .AllowAnyMethod()
+                .AllowAnyHeader());
+
             app.UseRouting();
 
             app.UseAuthorization();
@@ -60,11 +65,6 @@ namespace RESTful_API_MaximeMinta_v2
             });
 
             DBInitializer.Initialize(libContext);
-
-            app.UseCors(builder =>
-                builder.AllowAnyOrigin()
-                .AllowAnyMethod()
-                .AllowAnyHeader());
 
         }
     }
