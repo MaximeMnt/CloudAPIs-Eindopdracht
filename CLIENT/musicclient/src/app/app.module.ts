@@ -14,6 +14,9 @@ import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 
+//httpclient
+import { HttpClientModule } from '@angular/common/http';
+
 const config = {
   apiKey: "AIzaSyCyE7u2DONc1J56pn4WdYUTi8rbZ4taExI",
   authDomain: "cloudapis-eindproject.firebaseapp.com",
@@ -35,7 +38,8 @@ const config = {
     AppRoutingModule,
     AngularFireModule.initializeApp(config),
     AngularFireAuthModule,
-    AngularFirestoreModule
+    AngularFirestoreModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

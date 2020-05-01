@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../services/auth.service';
+import { ApiService, ITrack } from '../services/api.service';
 
 @Component({
   selector: 'app-user-profile',
@@ -8,9 +9,15 @@ import { AuthService } from '../services/auth.service';
 })
 export class UserProfileComponent implements OnInit {
 
-  constructor(public auth: AuthService) { }
+  public tracks:ITrack[] = [];
+
+  constructor(public auth: AuthService, public api:ApiService) { }
 
   ngOnInit() {
+    this.api.getTracks().subscribe(Tracks =>{
+      this.tracks.push(Tracks);
+      console.log(Tracks);
+    })
   }
 
 public showauth(){
