@@ -16,6 +16,7 @@ import { UserProfileComponent } from './user-profile/user-profile.component';
 
 //httpclient
 import { HttpClientModule } from '@angular/common/http';
+import { HomepageComponent } from './homepage/homepage/homepage.component';
 
 const config = {
   apiKey: "AIzaSyCyE7u2DONc1J56pn4WdYUTi8rbZ4taExI",
@@ -31,7 +32,8 @@ const config = {
 @NgModule({
   declarations: [
     AppComponent,
-    UserProfileComponent
+    UserProfileComponent,
+    HomepageComponent
   ],
   imports: [
     BrowserModule,
