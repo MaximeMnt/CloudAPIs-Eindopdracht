@@ -3,10 +3,16 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { RouterModule } from '@angular/router';
 
 //PrimeNG
 import {MenuModule} from 'primeng/menu';
-import {MenuItem} from 'primeng/api';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {ButtonModule} from 'primeng/button';
+import {TabMenuModule} from 'primeng/tabmenu';
+import {ListboxModule} from 'primeng/listbox';
+
+
 
 //Firebase
 import { AngularFireModule } from '@angular/fire';
@@ -17,6 +23,8 @@ import { UserProfileComponent } from './user-profile/user-profile.component';
 //httpclient
 import { HttpClientModule } from '@angular/common/http';
 import { HomepageComponent } from './homepage/homepage/homepage.component';
+import { NavigationComponent } from './navigation/navigation/navigation.component';
+
 
 const config = {
   apiKey: "AIzaSyCyE7u2DONc1J56pn4WdYUTi8rbZ4taExI",
@@ -33,15 +41,27 @@ const config = {
   declarations: [
     AppComponent,
     UserProfileComponent,
-    HomepageComponent
+    HomepageComponent,
+    NavigationComponent
   ],
-  imports: [
+  imports: [    
+    MenuModule,
+    ButtonModule,
+    BrowserAnimationsModule,
+    TabMenuModule,
+    ListboxModule,
+
     BrowserModule,
     AppRoutingModule,
     AngularFireModule.initializeApp(config),
     AngularFireAuthModule,
     AngularFirestoreModule,
-    HttpClientModule
+    HttpClientModule,
+    RouterModule.forRoot([
+      {path: "login", component: UserProfileComponent},
+      {path: "home", component: HomepageComponent },
+      {path: "", component:HomepageComponent}
+    ])
   ],
   providers: [],
   bootstrap: [AppComponent]

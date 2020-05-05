@@ -21,17 +21,17 @@ export class AuthService {
     private afs: AngularFirestore,
     private router: Router
   ) {
-    //this.user$ = this.afAuth.authState;
+    this.user$ = this.afAuth.authState;
 
-    this.user$ = this.afAuth.authState.pipe(
-      switchMap(user => {
-        if(user) {
-          return this.afs.doc<any>('users/${user.uid}').valueChanges();
-        } else {
-          return of(null);
-        }
-      })
-    );
+    // this.user$ = this.afAuth.authState.pipe(
+    //   switchMap(user => {
+    //     if(user) {
+    //       return this.afs.doc<any>('users/${user.uid}').valueChanges();
+    //     } else {
+    //       return of(null);
+    //     }
+    //   })
+    // );
    }
 
    async googleSignin(){

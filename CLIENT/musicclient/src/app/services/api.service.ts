@@ -21,7 +21,7 @@ export interface IArtist {
 	artistID: number;
 	name: string;
 	socials: any;
-	tracks: any[];
+	tracks: ITrack[];
 }
 
 export interface ITrack {
@@ -35,9 +35,9 @@ export interface ITrack {
 	artists: IArtist[];
 }
 
+
 // export interface IArtist{
 //   artistID:number;
 //   name:string;
 //   socials:any[];
-
 // }

@@ -9,15 +9,10 @@ import { ApiService, ITrack } from '../services/api.service';
 })
 export class UserProfileComponent implements OnInit {
 
-  public tracks:ITrack[] = [];
-
   constructor(public auth: AuthService, public api:ApiService) { }
 
   ngOnInit() {
-    this.api.getTracks().subscribe(Tracks =>{
-      this.tracks.push(Tracks);
-      console.log(Tracks);
-    })
+    
   }
 
 public showauth(){

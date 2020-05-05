@@ -1,1 +1,30 @@
-<p>homepage works!</p>
+<div *ngIf="auth.user$ | async as user ;else notLoggedIn">
+
+    <h1>Welcome {{user.displayName}}!</h1>
+    <p>Logged in with email: {{user.email}}</p>
+    <br>
+    <hr>
+    <br>
+    <div *ngIf="!tracks">
+        <i class="pi pi-spin pi-spinner" style="font-size: 3em"></i>
+        <p>Loading...</p>
+    </div>
+
+
+    <div *ngIf="tracks">
+        <h3>Latest Tracks:</h3>
+
+
+        <ul class="list-group">
+            <li *ngFor="let track of tracks"> {{track.title}} - {{track.artists[0].artist.name}} - {{track.key}} -
+                {{track.bpm}}BPM</li>
+        </ul>
+
+    </div>
+
+</div>
+
+<ng-template #notLoggedIn>
+    <h1>You're not logged in, go to the login page to login.</h1>
+
+</ng-template>
