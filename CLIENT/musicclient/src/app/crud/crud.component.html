@@ -1,0 +1,75 @@
+<h1 class="text-center">- CRUD -</h1>
+<p class="text-center"><i><b>C</b>reate, <b>R</b>ead, <b>U</b>pdate, <b>D</b>elete</i></p>
+
+<div class="text-center">
+    <h3>Select wich operation you want to do:</h3>
+    <select name="operations" [(ngModel)]="Selected">
+        <option value="Create">Create</option>
+        <option value="Read">Read</option>
+        <option value="Update">Update</option>
+        <option value="Delete">Delete</option>
+    </select>
+</div>
+
+<div class="text-center" *ngIf="Selected == 'Create'">
+    <br><br>
+    <h3>Create a new track:</h3>
+
+    <p>Title:</p>
+    <input type="text" placeholder="track title" required name="title" #title>
+
+    <p>Artist:</p>
+    <select [(ngModel)]='selectedArtist'>
+        <option value="{{artist.name}}" *ngFor='let artist of artists' #Artist>{{artist.name}}</option>
+    </select>
+    <br><br>
+    <p>Album:</p>
+    <input type="text" placeholder="track album" name="album" #Album>
+
+    <br><br>
+    <p>Genre:</p>
+    <input type="text" placeholder="Genre" name="genre" #Genre>
+
+    <br><br>
+    <p>Year:</p>
+    <input type="text" name="Year" placeholder="Release year" #Year>
+
+    <br><br>
+    <p>Bpm:</p>
+    <input type="text" name="BPM" placeholder="Tempo" #Bpm>
+
+    <br><br>
+    <p>Key:</p>
+    <input type="text" name="key" placeholder="key" #Key>
+
+    <br><br>
+    <button class="btn btn-success"
+        (click)="CreateTrack(title.value, Album.value, Genre.value, Year.value, Bpm.value, Key.value)">Add
+        to database</button>
+
+    <br><br><br>
+    <hr>
+    <h3>Create a new artist:</h3>
+    <p>Name:</p>
+    <input type="text" placeholder="artist name" required name="ArtistName" #ArtistName>
+    <br><br>
+    <p>Socials:</p>
+
+    <p *ngIf='!firstFieldCreated'>Create a field first!</p>
+    <form [formGroup]="myForm">
+        <div formArrayName="socials">
+            <div *ngFor="let phone of phoneForms.controls; let i=index" [formGroupName]="i">
+
+                <input type="text" placeholder="URL" formControlName="url"> <button class="btn btn-danger"
+                    (click)="deleteURL(i)">Delete</button>
+            </div>
+        </div>
+
+    </form>
+    <button class="btn btn-primary" (click)="addField()">Add field</button>
+    <br><br>
+    <button class="btn btn-success" (click)="CreateArtist(ArtistName.value)">Add Artist to database</button>
+
+</div>
+
+<hr>

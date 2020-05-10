@@ -23,26 +23,6 @@ namespace RESTful_API_MaximeMinta_v2
         {
             IQueryable<Track> query = library.Tracks;
 
-            if (!string.IsNullOrWhiteSpace(Key))
-            {
-                query = query.Where(d => d.Key == Key);
-            }
-            if (BPM != null)
-            {
-                query = query.Where(d => d.BPM == BPM);
-            }
-            if (!string.IsNullOrWhiteSpace(Album))
-                query = query.Where(d => d.Album == Album);
-            if (!string.IsNullOrWhiteSpace(Title))
-                query = query.Where(d => d.Title == Title);
-            if (page.HasValue)
-                query = query.Skip(page.Value * length);
-            query = query.Take(length);
-
-            //Nog zoeken op artist:
-            //if (!string.IsNullOrWhiteSpace(Artist))
-            //    query = query.Where(d => d.ArtistName == Artist);
-
             if (!string.IsNullOrWhiteSpace(sort))
             {
                 switch (sort)
@@ -71,6 +51,29 @@ namespace RESTful_API_MaximeMinta_v2
                         break;
                 }
             }
+
+
+            if (!string.IsNullOrWhiteSpace(Key))
+            {
+                query = query.Where(d => d.Key == Key);
+            }
+            if (BPM != null)
+            {
+                query = query.Where(d => d.BPM == BPM);
+            }
+            if (!string.IsNullOrWhiteSpace(Album))
+                query = query.Where(d => d.Album == Album);
+            if (!string.IsNullOrWhiteSpace(Title))
+                query = query.Where(d => d.Title == Title);
+            if (page.HasValue)
+                query = query.Skip(page.Value * length);
+            query = query.Take(length);
+
+            //Nog zoeken op artist:
+            //if (!string.IsNullOrWhiteSpace(Artist))
+            //    query = query.Where(d => d.ArtistName == Artist);
+
+            
             return query
                 .Include(d => d.Artists)
                 .ThenInclude(d => d.Artist) //toon nu de volledige artist klasse
@@ -124,6 +127,7 @@ namespace RESTful_API_MaximeMinta_v2
         [HttpPut] //change data from db
         public IActionResult UpdateTrack([FromBody] Track UpdateTrack)
         {
+            //TODO controleren op megeven van track
             var originalTrack = library.Tracks.Find(UpdateTrack.TrackID);
             if (originalTrack == null)
             {

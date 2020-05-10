@@ -22,15 +22,6 @@ namespace RESTful_API_MaximeMinta_v2
         {
             IQueryable<Artist> query = library.Artists;
 
-            if (!string.IsNullOrWhiteSpace(name))
-                query = query.Where(d => d.Name == name);
-            if (ID != null)
-                query = query.Where(d => d.ArtistID == ID);
-            if (page.HasValue)
-                query = query.Skip(page.Value * length);
-            query = query.Take(length);
-
-
             if (!string.IsNullOrWhiteSpace(sort))
             {
                 switch (sort)
@@ -59,6 +50,17 @@ namespace RESTful_API_MaximeMinta_v2
                         break;
                 }
             }
+
+            if (!string.IsNullOrWhiteSpace(name))
+                query = query.Where(d => d.Name == name);
+            if (ID != null)
+                query = query.Where(d => d.ArtistID == ID);
+            if (page.HasValue)
+                query = query.Skip(page.Value * length);
+            query = query.Take(length);
+
+
+   
             return query
                 .Include(d => d.Tracks)
                 .ThenInclude(d => d.Track) //level omlaag -> Toon de track

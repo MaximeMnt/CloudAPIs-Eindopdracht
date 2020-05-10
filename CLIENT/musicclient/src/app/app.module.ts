@@ -4,15 +4,16 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { RouterModule } from '@angular/router';
+import { FormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
+//import { Ng2SearchPipeModule } from 'ng2-search-filter'
 
 //PrimeNG
-import {MenuModule} from 'primeng/menu';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {ButtonModule} from 'primeng/button';
-import {TabMenuModule} from 'primeng/tabmenu';
-import {ListboxModule} from 'primeng/listbox';
-
-
+import { MenuModule } from 'primeng/menu';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ButtonModule } from 'primeng/button';
+import { TabMenuModule } from 'primeng/tabmenu';
+import { ListboxModule } from 'primeng/listbox';
 
 //Firebase
 import { AngularFireModule } from '@angular/fire';
@@ -24,6 +25,7 @@ import { UserProfileComponent } from './user-profile/user-profile.component';
 import { HttpClientModule } from '@angular/common/http';
 import { HomepageComponent } from './homepage/homepage/homepage.component';
 import { NavigationComponent } from './navigation/navigation/navigation.component';
+import { CRUDComponent } from './crud/crud.component';
 
 
 const config = {
@@ -42,9 +44,10 @@ const config = {
     AppComponent,
     UserProfileComponent,
     HomepageComponent,
-    NavigationComponent
+    NavigationComponent,
+    CRUDComponent
   ],
-  imports: [    
+  imports: [
     MenuModule,
     ButtonModule,
     BrowserAnimationsModule,
@@ -52,15 +55,18 @@ const config = {
     ListboxModule,
 
     BrowserModule,
+    FormsModule,
+    ReactiveFormsModule,
     AppRoutingModule,
     AngularFireModule.initializeApp(config),
     AngularFireAuthModule,
     AngularFirestoreModule,
     HttpClientModule,
     RouterModule.forRoot([
-      {path: "login", component: UserProfileComponent},
-      {path: "home", component: HomepageComponent },
-      {path: "", component:HomepageComponent}
+      { path: "login", component: UserProfileComponent },
+      { path: "home", component: HomepageComponent },
+      { path: "crud", component: CRUDComponent },
+      { path: "", component: HomepageComponent }
     ])
   ],
   providers: [],

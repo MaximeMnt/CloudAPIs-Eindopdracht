@@ -5,8 +5,7 @@ import { auth } from 'firebase/app';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
 
-import { Observable,of } from 'rxjs';
-import { switchMap } from 'rxjs/operators';
+import { Observable} from 'rxjs';
 
 
 
@@ -57,7 +56,6 @@ export class AuthService {
   }
 
   async signOut() {
-    //await this.afAuth.auth.signOut();
     await this.afAuth.signOut();
     this.router.navigate(['/']);
   }

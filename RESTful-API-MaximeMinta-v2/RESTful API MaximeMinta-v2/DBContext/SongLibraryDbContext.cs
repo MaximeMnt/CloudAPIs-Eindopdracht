@@ -20,9 +20,6 @@ namespace RESTful_API_MaximeMinta_v2
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            //TODO: Voeg een vreemde sleutel toe Tracks.Artists && Artists.Tracks
-           //modelBuilder.Entity<Artist>().HasOne(t => t.Name).WithMany(a => a.Tracks).HasForeignKey<Track>(b => b.t)
-
             base.OnModelCreating(modelBuilder);
 
             modelBuilder.Entity<TrackArtist>()
@@ -37,10 +34,6 @@ namespace RESTful_API_MaximeMinta_v2
                 .HasOne(t => t.Track)
                 .WithMany(a => a.Artists)
                 .HasForeignKey(t => t.TrackID);
-
-
-            //modelBuilder.Entity<Track>().HasKey(t => new { t.TrackID });
-            //modelBuilder.Entity<Artist>().HasKey(t => new { t.ArtistID });
         }
 
 

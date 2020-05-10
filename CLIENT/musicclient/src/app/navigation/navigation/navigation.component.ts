@@ -16,7 +16,9 @@ export class NavigationComponent implements OnInit {
   ngOnInit() {
     this.items = [
       {label: 'Home', icon: 'pi pi-fw pi-home', routerLink: 'home'},
-      {label: 'Login/Logout', icon: 'pi pi-fw pi-user', routerLink:'login'}
+      {label: 'Login/Logout', icon: 'pi pi-fw pi-user', routerLink:'login'},
+      {label: 'CRUD', icon: 'pi pi-fw pi-user', routerLink:'crud'}
+
   ];
   }
 
