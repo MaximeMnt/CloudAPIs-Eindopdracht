@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -27,6 +28,13 @@ namespace RESTful_API_MaximeMinta_v2
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
+            {
+                options.Authority = "https://securetoken.google.com/cloudapis-eindproject";
+                options.Audience = "cloudapis-eindproject"; //diegene waarvoor het token bestemt is.
+                
+            });
+
             services.AddDbContext<SongLibraryDbContext>(
                     options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")
                     )
@@ -48,6 +56,8 @@ namespace RESTful_API_MaximeMinta_v2
                 app.UseDeveloperExceptionPage();
             }
 
+            app.UseAuthentication(); //authentication
+            app.UseAuthorization();
             app.UseHttpsRedirection();
 
             app.UseCors(builder =>

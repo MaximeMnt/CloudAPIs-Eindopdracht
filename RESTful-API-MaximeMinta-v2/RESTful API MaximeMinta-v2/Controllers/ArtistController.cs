@@ -7,6 +7,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace RESTful_API_MaximeMinta_v2
 {
+    [Microsoft.AspNetCore.Authorization.Authorize]
     [Route("api/artists")]
     public class ArtistController : Controller
     {
