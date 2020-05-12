@@ -26,6 +26,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { HomepageComponent } from './homepage/homepage/homepage.component';
 import { NavigationComponent } from './navigation/navigation/navigation.component';
 import { CRUDComponent } from './crud/crud.component';
+import { httpInterceptProviders } from './services/http-interceptor';
 
 
 const config = {
@@ -69,7 +70,7 @@ const config = {
       { path: "", component: HomepageComponent }
     ])
   ],
-  providers: [],
+  providers: [httpInterceptProviders],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

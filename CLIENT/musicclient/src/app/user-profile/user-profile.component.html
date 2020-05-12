@@ -1,9 +1,9 @@
 <div *ngIf="auth.user$ | async as user ;else login">
 
-    {{user | json}}
+    <!--{{user | json}}-->
 
     <h1 class="text-center">You're logged in as: {{user.displayName}}!</h1>
-    <img src="{{user.photoURL}}" height="250px" >
+    <img src="{{user.photoURL}}" height="250px">
 
     <hr>
     <!--<button pButton class='button' (click)="auth.signOut()" label="Sign Out"></button>-->

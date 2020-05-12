@@ -5,7 +5,8 @@ import { auth } from 'firebase/app';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
 
-import { Observable} from 'rxjs';
+import { Observable, of } from 'rxjs';
+import { switchMap } from 'rxjs/operators';
 
 
 
@@ -15,28 +16,49 @@ import { Observable} from 'rxjs';
 export class AuthService {
   user$:Observable<any>;
 
+  public accessToken:any ="";
+
   constructor(
     private afAuth:AngularFireAuth,
     private afs: AngularFirestore,
     private router: Router
   ) {
-    this.user$ = this.afAuth.authState;
+    //this.user$ = this.afAuth.authState;
 
-    // this.user$ = this.afAuth.authState.pipe(
-    //   switchMap(user => {
-    //     if(user) {
-    //       return this.afs.doc<any>('users/${user.uid}').valueChanges();
-    //     } else {
-    //       return of(null);
-    //     }
-    //   })
-    // );
+    this.user$ = this.afAuth.authState.pipe(
+      switchMap(user => {
+          // Logged in
+        if (user) {
+          return this.afs.doc<any>(`users/${user.uid}`).valueChanges();
+        } else {
+          // Logged out
+          return of(null);
+        }
+      })
+    );
+   }
+
+   async setToken(idToken){
+    this.accessToken = idToken;
    }
 
    async googleSignin(){
      const provider = new auth.GoogleAuthProvider();
      const credential = await this.afAuth.signInWithPopup(provider);
      console.log(credential.user);
+     this.accessToken = credential.user.getIdTokenResult().then(function(idToken){
+       console.log("idtoken van getidtokenresult " + idToken.token)
+       const accessToken = idToken.token.toString();
+       console.log("access token variabele: " + accessToken)
+       return idToken;
+     });
+     
+    //  credential.user.getIdToken().then(function(idToken){
+    //    //this.accessToken = idToken;
+    //    const idTokentest = idToken;
+    //    //this.accessToken = idTokentest;
+    //    console.log("IdToken van function: " + idToken);
+    //  })
      return this.updateUserData(credential.user);
    }
 
@@ -50,7 +72,6 @@ export class AuthService {
       displayName: user.displayName, 
       photoURL: user.photoURL
     } 
-
     return userRef.set(data, { merge: true })
 
   }
