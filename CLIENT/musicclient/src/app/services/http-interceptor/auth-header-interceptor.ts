@@ -1,27 +1,26 @@
 import { Injectable } from "@angular/core";
 import { HttpInterceptor, HttpRequest, HttpHandler } from '@angular/common/http';
 import { AuthService } from '../auth.service';
-import { async } from '@angular/core/testing';
 
 @Injectable()
-export class AuthHeaderInterceptor implements HttpInterceptor{
-    
+export class AuthHeaderInterceptor implements HttpInterceptor {
+
     constructor(public auth: AuthService) {
     }
 
 
-    intercept(request: HttpRequest<any>, next: HttpHandler){
-        //const authToken = "Bearer " + this.auth.accessToken ;
+    intercept(request: HttpRequest<any>, next: HttpHandler) {
         let authToken
-        if(this.auth.accessToken.i != undefined){
-             authToken = "Bearer " + this.auth.accessToken.i.token; //authentication header moet hier nog bijkomen zonder te hardcoden
+        let accessToken = JSON.parse(localStorage.getItem("idToken"));
+        if (accessToken.token != null) {
+            authToken = "Bearer " + accessToken.token; //authentication header moet hier nog bijkomen zonder te hardcoden
+            const authReq = request.clone({
+                setHeaders: { Authorization: authToken }
+            });
+            return next.handle(authReq);
         }
-        else { authToken = "" }
-        //console.log(this.auth.accessToken);
-        //console.log(this.auth.accessToken.i.token);
-        const authReq = request.clone({
-            setHeaders: {Authorization: authToken}
-        });
-        return next.handle(authReq);
+        else { return next.handle(request); }
+
+
     }
 }

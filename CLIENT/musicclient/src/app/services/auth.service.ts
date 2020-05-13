@@ -47,12 +47,10 @@ export class AuthService {
      const credential = await this.afAuth.signInWithPopup(provider);
      console.log(credential.user);
      this.accessToken = credential.user.getIdTokenResult().then(function(idToken){
-       console.log("idtoken van getidtokenresult " + idToken.token)
-       const accessToken = idToken.token.toString();
-       console.log("access token variabele: " + accessToken)
-       return idToken;
+      localStorage.setItem('idToken', JSON.stringify(idToken)); //save to storage
+      return idToken;
      });
-     
+
     //  credential.user.getIdToken().then(function(idToken){
     //    //this.accessToken = idToken;
     //    const idTokentest = idToken;
