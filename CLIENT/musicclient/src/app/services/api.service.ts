@@ -9,11 +9,11 @@ export class ApiService {
 	constructor(private http: HttpClient) { }
 
 	//CREATE -- INSERT
-	createTrack(track:ITrack) {
+	createTrack(track) {
 		return this.http.post<ITrack>('http://localhost:6123/api/tracks',track);
 	}
 
-	createArtist(Artist:IArtist){
+	createArtist(Artist){
 		return this.http.post<IArtist>('http://localhost:6123/api/artists',Artist);
 	}
 

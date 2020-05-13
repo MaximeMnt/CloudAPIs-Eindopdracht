@@ -58,7 +58,7 @@
     <p *ngIf='!firstFieldCreated'>Create a field first!</p>
     <form [formGroup]="myForm">
         <div formArrayName="socials">
-            <div *ngFor="let phone of phoneForms.controls; let i=index" [formGroupName]="i">
+            <div *ngFor="let artist of ArtistForms.controls; let i=index" [formGroupName]="i">
 
                 <input type="text" placeholder="URL" formControlName="url"> <button class="btn btn-danger"
                     (click)="deleteURL(i)">Delete</button>
