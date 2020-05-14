@@ -38,12 +38,30 @@ export class ApiService {
 	SortTracks(type:string, dir:string){
 		return this.http.get<ITrack>('http://localhost:6123/api/tracks?sort=' + type + '&dir=' + dir);
 	}
+
+
+	//DELETE
+	deleteTrack(track:ITrack){
+		return this.http.delete<ITrack>('http://localhost:6123/api/tracks/' + track.trackID);
+	}
+
+
+	//3rd PARTY API
+	getChuckNorris(){
+		return this.http.get<IChuckNorris>('https://api.chucknorris.io/jokes/random');
+	}
+	
 }
 
-
-
-
-
+export interface IChuckNorris {
+	categories: any[];
+	created_at: string;
+	icon_url: string;
+	id: string;
+	updated_at: string;
+	url: string;
+	value: string;
+}
 
 
 export interface IArtist {

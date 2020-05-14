@@ -15,6 +15,7 @@ import { ButtonModule } from 'primeng/button';
 import { TabMenuModule } from 'primeng/tabmenu';
 import { ListboxModule } from 'primeng/listbox';
 import {InputTextModule} from 'primeng/inputtext';
+import {FieldsetModule} from 'primeng/fieldset';
 
 
 //Firebase
@@ -57,7 +58,7 @@ const config = {
     TabMenuModule,
     ListboxModule,
     InputTextModule,
-    
+    FieldsetModule,
 
     BrowserModule,
     FormsModule,

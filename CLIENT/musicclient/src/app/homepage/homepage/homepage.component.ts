@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { ApiService, ITrack, IArtist } from '../../services/api.service';
+import { ApiService, ITrack, IArtist, IChuckNorris } from '../../services/api.service';
 import { AuthService } from '../../services/auth.service'
 import { interval } from 'rxjs';
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 
 
 
@@ -20,6 +21,7 @@ export class HomepageComponent implements OnInit {
   }
   public tracks: ITrack;
   public artists: IArtist;
+  public joke: IChuckNorris;
   ngOnInit() {
   }
 
@@ -40,6 +42,12 @@ export class HomepageComponent implements OnInit {
   getArtists(){
     this.api.getArtists().subscribe(artists=>{
       this.artists = artists;
+    })
+  }
+
+  showJoke(){
+    this.api.getChuckNorris().subscribe(joke => {
+      this.joke = joke;
     })
   }
 

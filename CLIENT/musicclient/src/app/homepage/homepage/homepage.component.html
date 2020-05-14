@@ -56,4 +56,15 @@
     <h1 class="text-center">You're not logged in, go to the login page to login.</h1>
     <p class="text-center">To see the data from the database, please log in</p>
     <img src="https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Fmedia.tumblr.com%2Ftumblr_m3s8quWvws1r0adt2.gif&f=1&nofb=1" alt="crying gif" class="center">
+    
+    <p-fieldset legend="Joke" [toggleable]="true">
+        <p *ngIf="!joke">Do you want to hear a joke? click that button right there!</p>
+        <div *ngIf="joke">
+            <img src="{{joke.icon_url}}" alt="jokeimage">
+            <p>{{joke.value}}</p>
+        </div>
+        <br>
+        <button pButton type="button" class="ui-button-raised ui-button-rounded" (click)="showJoke()" label="Make me laugh!"></button>
+
+    </p-fieldset>
 </ng-template>

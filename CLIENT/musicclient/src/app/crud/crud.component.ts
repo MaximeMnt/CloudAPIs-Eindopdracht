@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService, IArtist, ITrack } from '../services/api.service';
 import { FormBuilder, FormGroup, FormArray, FormControl } from '@angular/forms';
+import { interval } from 'rxjs';
 
 
 @Component({
@@ -17,8 +18,10 @@ export class CRUDComponent implements OnInit {
   selectedArtist: any;
 
   constructor(public api: ApiService, private fb: FormBuilder) {
-    this.getArtists();
-    this.getTracks();
+    interval(2000).subscribe(x => {
+      this.getTracks();
+      this.getArtists();
+    });
   }
 
 
@@ -168,6 +171,12 @@ export class CRUDComponent implements OnInit {
     this.api.SortTracks(this.sortType, this.sortMethod).subscribe(tracks =>{
       this.tracks = tracks;
     })
+  }
+
+  deleteTrack(track:ITrack){
+    this.api.deleteTrack(track).subscribe(tracks => {
+      this.tracks = tracks;
+    });
   }
 
 
