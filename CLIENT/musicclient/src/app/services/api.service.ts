@@ -22,8 +22,21 @@ export class ApiService {
 		return this.http.get<ITrack>('http://localhost:6123/api/tracks');
 	}
 
+	getTracksPage(page:number,length:number = 5){
+		return this.http.get<ITrack>('http://localhost:6123/api/tracks?page=' + page + '&length=' + length);
+
+	}
+
 	getArtists() {
 		return this.http.get<IArtist>('http://localhost:6123/api/artists');
+	}
+	
+	SearchTracks(type:string, search:any){
+		return this.http.get<ITrack>('http://localhost:6123/api/tracks?' + type + '=' + search);
+	}
+
+	SortTracks(type:string, dir:string){
+		return this.http.get<ITrack>('http://localhost:6123/api/tracks?sort=' + type + '&dir=' + dir);
 	}
 }
 

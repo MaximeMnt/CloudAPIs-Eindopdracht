@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService, IArtist, ITrack } from '../services/api.service';
 import { FormBuilder, FormGroup, FormArray, FormControl } from '@angular/forms';
-import { ɵBrowserPlatformLocation } from '@angular/platform-browser';
+
 
 @Component({
   selector: 'app-crud',
@@ -11,7 +11,6 @@ import { ɵBrowserPlatformLocation } from '@angular/platform-browser';
 export class CRUDComponent implements OnInit {
 
   public Selected;
-  public artists: IArtist;
   firstFieldCreated: boolean = false;
 
   myForm: FormGroup;
@@ -19,6 +18,7 @@ export class CRUDComponent implements OnInit {
 
   constructor(public api: ApiService, private fb: FormBuilder) {
     this.getArtists();
+    this.getTracks();
   }
 
 
@@ -127,12 +127,48 @@ export class CRUDComponent implements OnInit {
 
   }
   
+    // --END CREATE--
 
+    // -- READ -- 
+    public selectedSearch:any
+    public artists: IArtist;
+    public tracks:ITrack;
+    public SearchKeyWord:string;
+    public trackSearchResults:ITrack;
+
+    public length;
+    public page;
+    public sortType;
+    public sortMethod;
   getArtists() {
     this.api.getArtists().subscribe(artists => {
       this.artists = artists;
     })
   }
 
-  // --END CREATE--
+
+  getTracks(){
+    this.api.getTracks().subscribe(tracks => {
+      this.tracks = tracks;  
+    })
+  }
+  
+  getPageTracks(){
+    this.api.getTracksPage(this.page, this.length).subscribe(tracks => {
+      this.tracks = tracks;
+    })
+  }
+  getTracksSearchResults(){
+    this.api.SearchTracks(this.selectedSearch,this.SearchKeyWord).subscribe(tracks =>{
+      this.tracks = tracks;
+    })
+  }
+
+  sortResults(){
+    this.api.SortTracks(this.sortType, this.sortMethod).subscribe(tracks =>{
+      this.tracks = tracks;
+    })
+  }
+
+
 }

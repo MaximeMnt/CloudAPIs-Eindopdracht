@@ -14,6 +14,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ButtonModule } from 'primeng/button';
 import { TabMenuModule } from 'primeng/tabmenu';
 import { ListboxModule } from 'primeng/listbox';
+import {InputTextModule} from 'primeng/inputtext';
+
 
 //Firebase
 import { AngularFireModule } from '@angular/fire';
@@ -54,6 +56,8 @@ const config = {
     BrowserAnimationsModule,
     TabMenuModule,
     ListboxModule,
+    InputTextModule,
+    
 
     BrowserModule,
     FormsModule,

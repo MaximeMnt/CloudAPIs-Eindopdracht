@@ -72,4 +72,73 @@
 
 </div>
 
+<div class="text-center" *ngIf="Selected=='Read'">
+    <br><br>
+    <h5>Options:</h5>
+    <p>Search:</p>
+    <select [(ngModel)]="selectedSearch">
+        <option value="Title">Title</option>
+        <option value="Album">Album</option>
+        <option value="Key">Key</option>
+        <option value="BPM">BPM</option>
+    </select>
+    <input type="text" pInputText [(ngModel)]="SearchKeyWord" placeholder="keyword here" />
+    <br><br>
+    <button pButton type="button" label="Search" (click)="getTracksSearchResults()"></button>
+
+    <br><br>
+    <p>Edit the length and switch between pages:</p>
+    <input placeholder="page" [(ngModel)]="page">
+    <input placeholder="length" [(ngModel)]='length'>
+    <br><br>
+    <button pButton type="button" label="Apply" (click)="getPageTracks()"></button>
+    <br><br>
+    <p>Sorting:</p>
+    <p>Sort Type:</p>
+    <select [(ngModel)]="sortType">
+        <option value="Title">Title</option>
+        <option value="BPM">Bpm</option>
+    </select>
+
+    <p>Sort Method:</p>
+    <select [(ngModel)]="sortMethod">
+        <option value="asc">Ascending</option>
+        <option value="desc">Descending</option>
+    </select>
+    <br><br>
+    <button pButton type="button" label="Apply" (click)="sortResults()"></button>
+
+
+    <!-- Table -->
+    <br><br>
+    <table class="table table-hover">
+        <thead class="thead-light">
+            <tr>
+                <th scope="col">Title</th>
+                <th scope="col">Album</th>
+                <th scope="col">Genre</th>
+                <th scope="col">Year</th>
+                <th scope="col">BPM</th>
+                <th scope="col">Key</th>
+                <th scope="col">Artist</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let track of tracks">
+                <th scope="row">{{track.title}}</th>
+                <td>{{track.album}}</td>
+                <td>{{track.genre}}</td>
+                <td>{{track.year}}</td>
+                <td>{{track.bpm}}</td>
+                <td>{{track.key}}</td>
+                <td *ngFor="let tr of track.artists">{{tr.artist.name}}</td>
+            </tr>
+        </tbody>
+    </table>
+
+
+
+</div>
+
+
 <hr>
