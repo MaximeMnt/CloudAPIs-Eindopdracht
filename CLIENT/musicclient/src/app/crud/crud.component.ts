@@ -18,10 +18,14 @@ export class CRUDComponent implements OnInit {
   selectedArtist: any;
 
   constructor(public api: ApiService, private fb: FormBuilder) {
-    interval(2000).subscribe(x => {
-      this.getTracks();
-      this.getArtists();
-    });
+    this.getArtists();
+    this.getTracks();
+    // interval(2000).subscribe(x => {
+    //   if(this.Selected=="Delete")
+    //   this.getTracks();
+    //   this.getArtists();
+    //   console.log("Refresh!")
+    // });
   }
 
 
@@ -179,5 +183,13 @@ export class CRUDComponent implements OnInit {
     });
   }
 
+  public Refresh(){
+    this.getTracks();
+    this.getArtists();
+  }
+
+  Update(track){
+
+  }
 
 }

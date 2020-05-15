@@ -1,6 +1,5 @@
 <h1 class="text-center">- CRUD -</h1>
 <p class="text-center"><i><b>C</b>reate, <b>R</b>ead, <b>U</b>pdate, <b>D</b>elete</i></p>
-
 <div class="text-center">
     <h3>Select wich operation you want to do:</h3>
     <select name="operations" [(ngModel)]="Selected">
@@ -9,6 +8,8 @@
         <option value="Update">Update</option>
         <option value="Delete">Delete</option>
     </select>
+    <br><br>
+    <button type="button" class="btn btn-success" (click)="Refresh()">Refresh</button>
 </div>
 
 <div class="text-center" *ngIf="Selected == 'Create'">
@@ -142,7 +143,32 @@
 
 <div class="text-center" *ngIf="Selected=='Update'">
     <br><br>
-    <p>hello</p>
+    <!-- Table -->
+    <table class="table table-hover">
+        <thead class="thead-light">
+            <tr>
+                <th scope="col">Title</th>
+                <th scope="col">Album</th>
+                <th scope="col">Genre</th>
+                <th scope="col">Year</th>
+                <th scope="col">BPM</th>
+                <th scope="col">Key</th>
+                <th scope="col">Artist</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let track of tracks">
+                <th scope="row"><input type="text" placeholder="{{track.title}}" required name="title" #title></th>
+                <td><input type="text" placeholder="{{track.album}}" name="album" #Album></td>
+                <td><input type="text" placeholder="{{track.genre}}" name="Genre" #Genre></td>
+                <td><input type="text" placeholder="{{track.year}}" name="Year" #Year></td>
+                <td><input type="text" placeholder="{{track.bpm}}" name="BPM" #BPM></td>
+                <td><input type="text" placeholder="{{track.key}}" name="Key" #Key></td>
+                <td *ngFor="let tr of track.artists"><input type="text" placeholder="{{tr.artist.name}}" name="Artist" #Artist></td>
+                <td><button type="button" class="btn btn-primary" (click)="Update(track)">Update</button></td>
+            </tr>
+        </tbody>
+    </table>
 </div>
 
 <div class="text-center" *ngIf="Selected=='Delete'">

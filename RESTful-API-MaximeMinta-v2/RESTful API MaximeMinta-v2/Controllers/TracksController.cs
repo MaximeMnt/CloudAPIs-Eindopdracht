@@ -70,9 +70,6 @@ namespace RESTful_API_MaximeMinta_v2
                 query = query.Skip(page.Value * length);
             query = query.Take(length);
 
-            //Nog zoeken op artist:
-            //if (!string.IsNullOrWhiteSpace(Artist))
-            //    query = query.Where(d => d.ArtistName == Artist);
 
             
             return query
@@ -100,7 +97,6 @@ namespace RESTful_API_MaximeMinta_v2
                 .Include(d => d.Artists)
                 .SingleOrDefault(d => d.TrackID == id);
             
-            //var track = library.Tracks.Find(id);
             if (track == null)
             {
               return NotFound();
@@ -138,9 +134,7 @@ namespace RESTful_API_MaximeMinta_v2
             {
                 originalTrack.Title = UpdateTrack.Title;
                 originalTrack.Album = UpdateTrack.Album;
-                //originalTrack.ArtistName = UpdateTrack.ArtistName;
                 originalTrack.BPM = UpdateTrack.BPM;
-                //originalTrack.FeaturingArtists = UpdateTrack.FeaturingArtists;
                 originalTrack.Genre = UpdateTrack.Genre;
                 originalTrack.Key = UpdateTrack.Key;
                 originalTrack.Year = UpdateTrack.Year;
