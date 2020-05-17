@@ -164,8 +164,11 @@
                 <td><input type="text" placeholder="{{track.year}}" name="Year" #Year></td>
                 <td><input type="text" placeholder="{{track.bpm}}" name="BPM" #BPM></td>
                 <td><input type="text" placeholder="{{track.key}}" name="Key" #Key></td>
-                <td *ngFor="let tr of track.artists"><input type="text" placeholder="{{tr.artist.name}}" name="Artist" #Artist></td>
-                <td><button type="button" class="btn btn-primary" (click)="Update(track)">Update</button></td>
+                <td *ngFor="let tr of track.artists"><input type="text" placeholder="{{tr.artist.name}}" name="Artist"
+                        #Artist></td>
+                <td><button type="button" class="btn btn-primary"
+                        (click)="Update(track, title.value , Album.value, Genre.value, Year.value,BPM.value,Key.value)">Update</button>
+                </td>
             </tr>
         </tbody>
     </table>

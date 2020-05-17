@@ -30,7 +30,7 @@ export class CRUDComponent implements OnInit {
 
 
   ngOnInit() {
-       this.myForm = this.fb.group({
+    this.myForm = this.fb.group({
       socials: this.fb.array([])
     })
     this.myForm.valueChanges.subscribe(console.log);
@@ -62,7 +62,7 @@ export class CRUDComponent implements OnInit {
     console.log("b " + bpm);
     console.log("k " + key);
     console.log(this.selectedArtist);
-    
+
     var body = {
       title: title,
       album: album,
@@ -119,34 +119,34 @@ export class CRUDComponent implements OnInit {
     console.log(JSON.stringify(body));
 
 
-  //   {
+    //   {
 
-  //     name: "TEST",
-  //     socials: [
-  //         {
-  //             url: "https://test.org"
-  //         },
-  //         {
-  //             url: "https://test.com"
-  //         }
-  //     ]
-  // }
+    //     name: "TEST",
+    //     socials: [
+    //         {
+    //             url: "https://test.org"
+    //         },
+    //         {
+    //             url: "https://test.com"
+    //         }
+    //     ]
+    // }
 
   }
-  
-    // --END CREATE--
 
-    // -- READ -- 
-    public selectedSearch:any
-    public artists: IArtist;
-    public tracks:ITrack;
-    public SearchKeyWord:string;
-    public trackSearchResults:ITrack;
+  // --END CREATE--
 
-    public length;
-    public page;
-    public sortType;
-    public sortMethod;
+  // -- READ -- 
+  public selectedSearch: any
+  public artists: IArtist;
+  public tracks: ITrack;
+  public SearchKeyWord: string;
+  public trackSearchResults: ITrack;
+
+  public length;
+  public page;
+  public sortType;
+  public sortMethod;
   getArtists() {
     this.api.getArtists().subscribe(artists => {
       this.artists = artists;
@@ -154,42 +154,83 @@ export class CRUDComponent implements OnInit {
   }
 
 
-  getTracks(){
+  getTracks() {
     this.api.getTracks().subscribe(tracks => {
-      this.tracks = tracks;  
+      this.tracks = tracks;
     })
   }
-  
-  getPageTracks(){
+
+  getPageTracks() {
     this.api.getTracksPage(this.page, this.length).subscribe(tracks => {
       this.tracks = tracks;
     })
   }
-  getTracksSearchResults(){
-    this.api.SearchTracks(this.selectedSearch,this.SearchKeyWord).subscribe(tracks =>{
+  getTracksSearchResults() {
+    this.api.SearchTracks(this.selectedSearch, this.SearchKeyWord).subscribe(tracks => {
       this.tracks = tracks;
     })
   }
 
-  sortResults(){
-    this.api.SortTracks(this.sortType, this.sortMethod).subscribe(tracks =>{
+  sortResults() {
+    this.api.SortTracks(this.sortType, this.sortMethod).subscribe(tracks => {
       this.tracks = tracks;
     })
   }
 
-  deleteTrack(track:ITrack){
+  deleteTrack(track: ITrack) {
     this.api.deleteTrack(track).subscribe(tracks => {
       this.tracks = tracks;
     });
   }
 
-  public Refresh(){
+  public Refresh() {
     this.getTracks();
     this.getArtists();
   }
 
-  Update(track){
+  Update(track, title, Album, Genre, Year, BPM, Key) {
 
+    let finTitle, finAlbum, finGenre, finYear, finBPM, finKey;
+
+    if(!title){
+      finTitle = track.title;
+    } else finTitle = title;
+
+    if(!Album){
+      finAlbum = track.album;
+    } else finAlbum = Album;
+
+    if(!Genre){
+      finGenre = track.genre;
+    } else finGenre = Genre;
+
+    if(!Year){
+      finYear = track.year;
+    } else finYear = Year;
+
+    if(!BPM){
+      finBPM = track.bpm
+    } else finBPM = BPM;
+
+    if(!Key){
+      finKey = track.key
+    } else finKey = Key;
+
+
+    var body = {
+
+
+      title: finTitle,
+      album: finAlbum,
+      genre: finGenre,
+      year: finYear,
+      bpm: finBPM,
+      key: finKey
+
+    };
+    console.log(track.trackID);
+    console.log(body);
+    this.api.UpdateTrack(track, body);
   }
-
 }
+

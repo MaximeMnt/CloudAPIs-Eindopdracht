@@ -45,6 +45,12 @@ export class ApiService {
 		return this.http.delete<ITrack>('http://localhost:6123/api/tracks/' + track.trackID);
 	}
 
+	//Update
+	UpdateTrack(track:ITrack, body){
+		console.log('wordt uitgevoerd')
+		return this.http.put<ITrack>('http://localhost:6123/api/tracks/' + track.trackID, body);
+	}
+
 
 	//3rd PARTY API
 	getChuckNorris(){

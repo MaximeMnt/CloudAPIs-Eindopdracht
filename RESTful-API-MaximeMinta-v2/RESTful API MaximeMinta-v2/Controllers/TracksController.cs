@@ -121,11 +121,16 @@ namespace RESTful_API_MaximeMinta_v2
             }
         }
 
+        [Route("{id}")]
         [HttpPut] //change data from db
-        public IActionResult UpdateTrack([FromBody] Track UpdateTrack)
+        public IActionResult UpdateTrack([FromBody] Track UpdateTrack, int id)
         {
+            if (UpdateTrack == null)
+            {
+                return BadRequest();
+            }
             //TODO controleren op megeven van track
-            var originalTrack = library.Tracks.Find(UpdateTrack.TrackID);
+            var originalTrack = library.Tracks.Find(id);
             if (originalTrack == null)
             {
                 return NotFound();
