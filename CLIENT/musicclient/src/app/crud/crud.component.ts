@@ -70,12 +70,15 @@ export class CRUDComponent implements OnInit {
       year: year,
       bpm: bpm,
       key: key,
-      artists: [{
-        name: this.selectedArtist
-      }]
+      // artists: [{
+      //   artistID: this.selectedArtist.artistID,
+      //   name: this.selectedArtist
+      // }]
     }
 
-    this.api.createTrack(body);
+    this.api.createTrack(body).subscribe(success =>{
+      console.log(success);
+    });
     console.log(JSON.stringify(body));
     //TODO: Eerst converteren naar JSON: Dan pas kunnen we een nieuwe track sturen naar de db
     //juiste formaat:
@@ -115,7 +118,9 @@ export class CRUDComponent implements OnInit {
 
 
 
-    this.api.createArtist(body);
+    this.api.createArtist(body).subscribe(track =>{
+      console.log(track);
+    });
     console.log(JSON.stringify(body));
 
 
@@ -230,7 +235,9 @@ export class CRUDComponent implements OnInit {
     };
     console.log(track.trackID);
     console.log(body);
-    this.api.UpdateTrack(track, body);
+    this.api.UpdateTrack(track, body).subscribe(success =>{
+      console.log(success);
+    });
   }
 }
 

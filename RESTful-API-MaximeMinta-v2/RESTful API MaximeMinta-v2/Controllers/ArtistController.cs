@@ -73,6 +73,11 @@ namespace RESTful_API_MaximeMinta_v2
         [HttpPost]
         public IActionResult CreateArtist([FromBody] Artist newArtist)
         {
+            if (newArtist == null)
+            {
+                return BadRequest();
+            }
+
             library.Artists.Add(newArtist);
             library.SaveChanges();
             return Created("",newArtist);

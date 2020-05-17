@@ -10,11 +10,15 @@ export class ApiService {
 
 	//CREATE -- INSERT
 	createTrack(track) {
-		return this.http.post<ITrack>('http://localhost:6123/api/tracks',track);
+		return this.http.post<ITrack>('http://localhost:6123/api/tracks', track, {
+			headers: new HttpHeaders({
+				"Content-Type": "application/json",
+			}),
+		});
 	}
 
-	createArtist(Artist){
-		return this.http.post<IArtist>('http://localhost:6123/api/artists',Artist);
+	createArtist(Artist) {
+		return this.http.post<IArtist>('http://localhost:6123/api/artists', Artist);
 	}
 
 	//READ
@@ -22,7 +26,7 @@ export class ApiService {
 		return this.http.get<ITrack>('http://localhost:6123/api/tracks');
 	}
 
-	getTracksPage(page:number,length:number = 5){
+	getTracksPage(page: number, length: number = 5) {
 		return this.http.get<ITrack>('http://localhost:6123/api/tracks?page=' + page + '&length=' + length);
 
 	}
@@ -30,33 +34,38 @@ export class ApiService {
 	getArtists() {
 		return this.http.get<IArtist>('http://localhost:6123/api/artists');
 	}
-	
-	SearchTracks(type:string, search:any){
+
+	SearchTracks(type: string, search: any) {
 		return this.http.get<ITrack>('http://localhost:6123/api/tracks?' + type + '=' + search);
 	}
 
-	SortTracks(type:string, dir:string){
+	SortTracks(type: string, dir: string) {
 		return this.http.get<ITrack>('http://localhost:6123/api/tracks?sort=' + type + '&dir=' + dir);
 	}
 
 
 	//DELETE
-	deleteTrack(track:ITrack){
+	deleteTrack(track: ITrack) {
 		return this.http.delete<ITrack>('http://localhost:6123/api/tracks/' + track.trackID);
 	}
 
 	//Update
-	UpdateTrack(track:ITrack, body){
+	UpdateTrack(track: ITrack, body) {
 		console.log('wordt uitgevoerd')
-		return this.http.put<ITrack>('http://localhost:6123/api/tracks/' + track.trackID, body);
+		return this.http.put<ITrack>('http://localhost:6123/api/tracks/' + track.trackID, body, {
+			headers: new HttpHeaders({
+				"Content-Type": "application/json",
+			}),
+		}
+		);
 	}
 
 
 	//3rd PARTY API
-	getChuckNorris(){
+	getChuckNorris() {
 		return this.http.get<IChuckNorris>('https://api.chucknorris.io/jokes/random');
 	}
-	
+
 }
 
 export interface IChuckNorris {
