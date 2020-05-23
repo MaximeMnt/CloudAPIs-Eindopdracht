@@ -122,6 +122,9 @@ namespace RESTful_API_MaximeMinta_v2
             if (OriginalArtist == null)
             {
                 return NotFound();
+            }else if (OriginalArtist.Name == null)
+            {
+                return BadRequest();
             }
             else
             {

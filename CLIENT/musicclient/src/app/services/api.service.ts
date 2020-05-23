@@ -49,15 +49,26 @@ export class ApiService {
 		return this.http.delete<ITrack>('http://localhost:6123/api/tracks/' + track.trackID);
 	}
 
+	deleteArtist(artist: IArtist){
+		return this.http.delete<IArtist>('http://localhost:6123/api/artists/' + artist.artistID);
+	}
+
 	//Update
 	UpdateTrack(track: ITrack, body) {
-		console.log('wordt uitgevoerd')
 		return this.http.put<ITrack>('http://localhost:6123/api/tracks/' + track.trackID, body, {
 			headers: new HttpHeaders({
 				"Content-Type": "application/json",
 			}),
 		}
 		);
+	}
+
+	UpdateArtist(artist: IArtist, body){
+		return this.http.put<IArtist>('http://localhost:6123/api/artists/' + artist.artistID, body, {
+			headers: new HttpHeaders({
+				"Content-Type": "application/json"
+			}),
+		});
 	}
 
 

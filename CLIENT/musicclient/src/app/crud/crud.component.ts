@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ApiService, IArtist, ITrack } from '../services/api.service';
 import { FormBuilder, FormGroup, FormArray, FormControl } from '@angular/forms';
 import { interval } from 'rxjs';
+import { SubjectSubscriber } from 'rxjs/internal/Subject';
 
 
 @Component({
@@ -76,7 +77,7 @@ export class CRUDComponent implements OnInit {
       // }]
     }
 
-    this.api.createTrack(body).subscribe(success =>{
+    this.api.createTrack(body).subscribe(success => {
       console.log(success);
     });
     console.log(JSON.stringify(body));
@@ -118,7 +119,7 @@ export class CRUDComponent implements OnInit {
 
 
 
-    this.api.createArtist(body).subscribe(track =>{
+    this.api.createArtist(body).subscribe(track => {
       console.log(track);
     });
     console.log(JSON.stringify(body));
@@ -188,56 +189,99 @@ export class CRUDComponent implements OnInit {
     });
   }
 
+  deleteArtist(artist: IArtist) {
+    if(artist.socials==null || artist.socials == undefined){
+      console.log('yes!')
+      this.api.deleteArtist(artist).subscribe(artists => {
+        this.artists = artists;
+      });
+    } else{
+      console.log("now!");
+      artist.socials = undefined;
+      this.api.UpdateArtist(artist,artist).subscribe(artists =>{
+        console.log(artists)
+      });
+      this.api.deleteArtist(artist);
+    }
+    
+  }
+
   public Refresh() {
     this.getTracks();
     this.getArtists();
   }
 
+  updateArtist: string = "";
   Update(track, title, Album, Genre, Year, BPM, Key) {
+    let finTitle, finAlbum, finGenre, finYear, finBPM, finKey, finArtist;
 
-    let finTitle, finAlbum, finGenre, finYear, finBPM, finKey;
-
-    if(!title){
+    if (!title) {
       finTitle = track.title;
     } else finTitle = title;
 
-    if(!Album){
+    if (!Album) {
       finAlbum = track.album;
     } else finAlbum = Album;
 
-    if(!Genre){
+    if (!Genre) {
       finGenre = track.genre;
     } else finGenre = Genre;
 
-    if(!Year){
+    if (!Year) {
       finYear = track.year;
     } else finYear = Year;
 
-    if(!BPM){
+    if (!BPM) {
       finBPM = track.bpm
     } else finBPM = BPM;
 
-    if(!Key){
+    if (!Key) {
       finKey = track.key
     } else finKey = Key;
 
+    // if (this.updateArtist == track.artists[0].artist.name || this.updateArtist.length == 0) {
+    //   if (track.artists[0] != undefined) {
+    //     finArtist = track.artists[0].artist.name;
+    //   }
+    //   else {
+    //     finArtist = {
+    //       name: 'undefined',
+    //       socials: []
+    //     }
+    //   }
+
+    // } else { finArtist = this.updateArtist; }
 
     var body = {
-
 
       title: finTitle,
       album: finAlbum,
       genre: finGenre,
       year: finYear,
       bpm: finBPM,
-      key: finKey
+      key: finKey,
+      // artists: [
+      //   {
+      //     artist: {
+      //       name: finArtist
+      //     }
+      //   }
+      // ]
 
     };
-    console.log(track.trackID);
-    console.log(body);
-    this.api.UpdateTrack(track, body).subscribe(success =>{
+    console.log(track);
+    // var artistBody = {
+    //   name: finArtist,
+    //   //socials: track.artist.socials,
+    //   //tracks: track.artist.tracks
+    // }
+    this.api.UpdateTrack(track, body).subscribe(success => {
       console.log(success);
     });
+    // this.api.UpdateArtist(track.artist, body).subscribe(success => {
+    //   console.log(success);
+    // });
+
   }
 }
 
