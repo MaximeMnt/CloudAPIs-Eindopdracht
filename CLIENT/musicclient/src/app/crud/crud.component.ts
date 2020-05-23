@@ -190,20 +190,25 @@ export class CRUDComponent implements OnInit {
   }
 
   deleteArtist(artist: IArtist) {
-    if(artist.socials==null || artist.socials == undefined){
-      console.log('yes!')
+    console.log("HALLO!")
+    if (artist.socials.length == 0) {
+      console.log("lenght = 0 ")
       this.api.deleteArtist(artist).subscribe(artists => {
         this.artists = artists;
       });
-    } else{
-      console.log("now!");
-      artist.socials = undefined;
-      this.api.UpdateArtist(artist,artist).subscribe(artists =>{
-        console.log(artists)
+    } else {
+      console.log('foreachloop');
+      artist.socials.forEach(element => {
+        this.api.deleteSocials(element.urlID).subscribe(blabla =>{
+          console.log(blabla);
+        });
       });
-      this.api.deleteArtist(artist);
     }
-    
+
+
+
+
+
   }
 
   public Refresh() {

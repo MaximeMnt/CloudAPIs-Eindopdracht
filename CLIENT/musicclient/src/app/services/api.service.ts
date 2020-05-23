@@ -53,6 +53,11 @@ export class ApiService {
 		return this.http.delete<IArtist>('http://localhost:6123/api/artists/' + artist.artistID);
 	}
 
+	deleteSocials(id: number){
+		return this.http.delete<any>('http://localhost:6123/api/URLs/' + id)
+	}
+
+
 	//Update
 	UpdateTrack(track: ITrack, body) {
 		return this.http.put<ITrack>('http://localhost:6123/api/tracks/' + track.trackID, body, {
