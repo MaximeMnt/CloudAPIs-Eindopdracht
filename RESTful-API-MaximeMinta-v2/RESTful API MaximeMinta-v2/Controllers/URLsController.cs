@@ -11,10 +11,14 @@ namespace RESTful_API_MaximeMinta_v2
 {
     [Microsoft.AspNetCore.Authorization.Authorize]
     [Route("api/[controller]")]
-    public class URLsController : ControllerBase
+    public class URLsController : Controller
     {
         private readonly SongLibraryDbContext library;
 
+        public URLsController(SongLibraryDbContext library)
+        {
+            this.library = library;
+        }
 
         [HttpGet]
         public string Get()

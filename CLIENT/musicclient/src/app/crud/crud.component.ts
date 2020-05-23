@@ -3,6 +3,7 @@ import { ApiService, IArtist, ITrack } from '../services/api.service';
 import { FormBuilder, FormGroup, FormArray, FormControl } from '@angular/forms';
 import { interval } from 'rxjs';
 import { SubjectSubscriber } from 'rxjs/internal/Subject';
+import { delay } from 'rxjs/operators';
 
 
 @Component({
@@ -203,6 +204,13 @@ export class CRUDComponent implements OnInit {
           console.log(blabla);
         });
       });
+
+      setTimeout(fucntion => {
+        this.api.deleteArtist(artist).subscribe(artists =>{
+          this.artists = artists;
+        })
+      },250);
+      
     }
 
 
