@@ -41,7 +41,7 @@ Het installeren van het project begint met het uitvoeren van een
 ```npm install```
 
 Het uitvoeren van het project kan via
-````npm start```
+```npm start```
 
 In development omgeving start de client standaard op op het volgende adres:
 ```localhost:4000```
