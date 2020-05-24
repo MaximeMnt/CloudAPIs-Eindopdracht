@@ -57,12 +57,6 @@ export class CRUDComponent implements OnInit {
   }
 
   CreateTrack(title, album, genre, year, bpm, key) {
-    console.log("title " + title);
-    console.log("a " + album);
-    console.log("g " + genre);
-    console.log("y " + year);
-    console.log("b " + bpm);
-    console.log("k " + key);
     console.log(this.selectedArtist);
 
     var body = {
@@ -111,34 +105,12 @@ export class CRUDComponent implements OnInit {
   CreateArtist(Artistname) {
     var body = {
       name: Artistname,
-      socials: [{
-        url: null
-      }]
+      socials: this.ArtistForms.value
     }
-    body.socials.pop();
-    body.socials.push(this.ArtistForms.value);
-
-
 
     this.api.createArtist(body).subscribe(track => {
       console.log(track);
     });
-    console.log(JSON.stringify(body));
-
-
-    //   {
-
-    //     name: "TEST",
-    //     socials: [
-    //         {
-    //             url: "https://test.org"
-    //         },
-    //         {
-    //             url: "https://test.com"
-    //         }
-    //     ]
-    // }
-
   }
 
   // --END CREATE--
@@ -191,14 +163,11 @@ export class CRUDComponent implements OnInit {
   }
 
   deleteArtist(artist: IArtist) {
-    console.log("HALLO!")
     if (artist.socials.length == 0) {
-      console.log("lenght = 0 ")
       this.api.deleteArtist(artist).subscribe(artists => {
         this.artists = artists;
       });
     } else {
-      console.log('foreachloop');
       artist.socials.forEach(element => {
         this.api.deleteSocials(element.urlID).subscribe(blabla =>{
           console.log(blabla);
@@ -252,19 +221,6 @@ export class CRUDComponent implements OnInit {
       finKey = track.key
     } else finKey = Key;
 
-    // if (this.updateArtist == track.artists[0].artist.name || this.updateArtist.length == 0) {
-    //   if (track.artists[0] != undefined) {
-    //     finArtist = track.artists[0].artist.name;
-    //   }
-    //   else {
-    //     finArtist = {
-    //       name: 'undefined',
-    //       socials: []
-    //     }
-    //   }
-
-    // } else { finArtist = this.updateArtist; }
-
     var body = {
 
       title: finTitle,
@@ -282,7 +238,6 @@ export class CRUDComponent implements OnInit {
       // ]
 
     };
-    console.log(track);
     // var artistBody = {
     //   name: finArtist,
     //   //socials: track.artist.socials,
