@@ -52,6 +52,10 @@ De client geeft de user de mogelijkheid om op een gemakkelijke manier data uit d
 Op de homepagina wordt alle data getoond zonder searching paging & sorting. Om toch de data te kunnen sorteren of zoeken, ... Moet de user navigeren naar de CRUD pagina. Daar worden alle CRUD operaties uitgevoerd.
 Om als user de data vanuit de database te kunnen lezen moet er ingelogd worden. De login methode die gebruikt is geweest is [Firebase Authentication](https://firebase.google.com/docs/auth/)
 
+
+Als Third party api wordt er gebruik gemaakt van de [Chuck norris jokes api](https://api.chucknorris.io/)
+Deze toont wanneer een user niet is ingelogd en op een knop drukt een mopje.
+
 ## License
 
 MIT License
