@@ -82,14 +82,24 @@ namespace RESTful_API_MaximeMinta_v2
         [HttpPost]
         public IActionResult CreateTrack([FromBody] Track newTrack)
         {
-            if (newTrack == null)
+            try
             {
+                if (newTrack == null)
+                {
+                    return BadRequest();
+                }
+                //Track toevoegen
+                library.Tracks.Add(newTrack);
+                library.SaveChanges(); //opslaan
+                return Created("", newTrack); //stuur een result 201 terug met het item als content
+            }
+            catch (Exception)
+            {
+
                 return BadRequest();
             }
-            //Track toevoegen
-            library.Tracks.Add(newTrack);
-            library.SaveChanges(); //opslaan
-            return Created("", newTrack); //stuur een result 201 terug met het boek als content
+
+            
         }
 
 

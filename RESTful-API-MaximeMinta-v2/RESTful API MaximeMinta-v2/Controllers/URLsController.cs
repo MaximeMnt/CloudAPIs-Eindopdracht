@@ -31,14 +31,21 @@ namespace RESTful_API_MaximeMinta_v2
         [HttpPost]
         public IActionResult CreateURL([FromBody] URL newURL)
         {
-            if (newURL == null)
+            try
+            {
+                if (newURL == null)
+                {
+                    return BadRequest();
+                }
+                //Track toevoegen
+                library.URLs.Add(newURL);
+                library.SaveChanges(); //opslaan
+                return Created("", newURL); //stuur een result 201 terug met het boek als content
+            }
+            catch (Exception)
             {
                 return BadRequest();
-            }
-            //Track toevoegen
-            library.URLs.Add(newURL);
-            library.SaveChanges(); //opslaan
-            return Created("", newURL); //stuur een result 201 terug met het boek als content
+            }           
         }
 
         // PUT: api/URLs/5
