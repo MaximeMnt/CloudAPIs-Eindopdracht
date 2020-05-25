@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, FormArray, FormControl } from '@angular/forms';
 import { interval } from 'rxjs';
 import { SubjectSubscriber } from 'rxjs/internal/Subject';
 import { delay } from 'rxjs/operators';
+import { AuthService } from '../services/auth.service';
 
 
 @Component({
@@ -19,7 +20,7 @@ export class CRUDComponent implements OnInit {
   myForm: FormGroup;
   selectedArtist: any;
 
-  constructor(public api: ApiService, private fb: FormBuilder) {
+  constructor(public api: ApiService, private fb: FormBuilder, public auth: AuthService) {
     this.getArtists();
     this.getTracks();
     // interval(2000).subscribe(x => {

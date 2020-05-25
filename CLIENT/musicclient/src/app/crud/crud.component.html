@@ -1,5 +1,7 @@
 <h1 class="text-center">- CRUD -</h1>
 <p class="text-center"><i><b>C</b>reate, <b>R</b>ead, <b>U</b>pdate, <b>D</b>elete</i></p>
+<div *ngIf="auth.user$ | async as user ;else notLoggedIn">
+
 <div class="text-center">
     <h3>Select wich operation you want to do:</h3>
     <select name="operations" [(ngModel)]="Selected">
@@ -233,3 +235,9 @@
     </table>
 </div>
 <hr>
+</div>
+
+<ng-template #notLoggedIn>
+    <h1 class="text-center">You're not logged in, go to the login page to login.</h1>
+    <p class="text-center">To see the data from the database, please log in</p>
+</ng-template>
